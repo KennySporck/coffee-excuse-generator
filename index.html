@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffee Excuse Generator</title>
-    <meta name="description" content="AI-powered coffee excuse generator - Get creative reasons for your next coffee break!">
     <style>
         * {
             margin: 0;
@@ -107,28 +106,12 @@
             font-size: 0.9rem;
         }
         
-        .status {
+        .api-note {
             background: rgba(0,0,0,0.2);
             padding: 1rem;
             border-radius: 10px;
             margin-top: 2rem;
             font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                margin: 1rem;
-                padding: 1.5rem;
-            }
-            
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .reason-display {
-                font-size: 1.1rem;
-                padding: 1.5rem;
-            }
         }
     </style>
 </head>
@@ -147,12 +130,8 @@
             Click the button to get your AI-generated coffee excuse!
         </div>
         
-        <div class="status" id="status">
-            Ready to generate unlimited coffee excuses!
-        </div>
-        
         <div class="footer">
-            Made with ❤️ and lots of ☕ | <a href="https://github.com/KennySporck" style="color: #D4A574;">View Source</a>
+            Made with ❤️ and lots of ☕
         </div>
     </div>
 
@@ -160,7 +139,6 @@
         async function generateReason() {
             const btn = document.getElementById('generateBtn');
             const display = document.getElementById('reasonDisplay');
-            const status = document.getElementById('status');
             
             btn.disabled = true;
             btn.textContent = 'Brewing...';
@@ -168,6 +146,7 @@
             display.classList.add('loading');
             
             try {
+                // Call Cloudflare Worker function
                 const response = await fetch('/api/coffee');
                 const data = await response.json();
                 
@@ -176,17 +155,9 @@
                 }
                 
                 display.textContent = `"${data.reason}"`;
-                
-                if (data.note) {
-                    status.textContent = data.note;
-                } else {
-                    status.textContent = '✅ AI-powered excuse generated successfully!';
-                }
-                
             } catch (error) {
                 console.error('Error:', error);
                 display.textContent = 'Oops! The coffee machine is broken. Try again in a moment.';
-                status.textContent = '❌ Something went wrong. Please try again.';
             }
             
             display.classList.remove('loading');

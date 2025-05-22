@@ -1,3 +1,5 @@
+// functions/api/coffee.js - Cloudflare Pages Function
+
 export async function onRequest(context) {
   const { request, env } = context;
   
@@ -13,7 +15,27 @@ export async function onRequest(context) {
   }
 
   try {
-    // Option 1: Use Groq (Free tier - recommended)
+    // Option 1: Use Cloudflare AI (FREE and built-in!)
+    if (env.AI) {
+      const aiResponse = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+        prompt: "Generate a witty, creative, and specific reason why someone needs coffee right now. One sentence only. Be humorous and relatable. Examples: 'Your brain cells are holding tiny protest signs demanding caffeine before they'll process another thought' or 'The Monday energy vampires have drained your soul and only coffee can resurrect your productivity.' Give me just the reason, no extra text."
+      });
+
+      // Extract the response text from Cloudflare AI
+      let reason = "";
+      if (aiResponse && aiResponse.response) {
+        reason = aiResponse.response.trim().replace(/['"]/g, '');
+      }
+
+      if (reason) {
+        return Response.json({ 
+          reason: reason,
+          source: "Cloudflare AI (Llama 3.1)"
+        }, { headers: corsHeaders });
+      }
+    }
+
+    // Option 2: Use Groq (Free tier - backup)
     if (env.GROQ_API_KEY) {
       const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
@@ -25,7 +47,7 @@ export async function onRequest(context) {
           model: "llama3-8b-8192",
           messages: [{
             role: "user",
-            content: "Generate a witty, creative, and specific reason why someone needs coffee right now. One sentence only. Be humorous and relatable. Examples: 'Your brain cells are holding tiny protest signs demanding caffeine before they'll process another thought' or 'The Monday energy vampires have drained your soul and only coffee can resurrect your productivity.'"
+            content: "Generate a witty, creative, and specific reason why someone needs coffee right now. One sentence only. Be humorous and relatable."
           }],
           max_tokens: 100,
           temperature: 0.9
@@ -36,12 +58,13 @@ export async function onRequest(context) {
       
       if (data.choices && data.choices[0]) {
         return Response.json({ 
-          reason: data.choices[0].message.content.trim().replace(/['"]/g, '')
+          reason: data.choices[0].message.content.trim().replace(/['"]/g, ''),
+          source: "Groq API"
         }, { headers: corsHeaders });
       }
     }
 
-    // Option 2: Use Claude Haiku (very cheap - $0.25 per 1000 requests)
+    // Option 3: Use Claude Haiku (very cheap - backup)
     if (env.ANTHROPIC_API_KEY) {
       const response = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
@@ -64,12 +87,13 @@ export async function onRequest(context) {
       
       if (data.content && data.content[0]) {
         return Response.json({ 
-          reason: data.content[0].text.trim().replace(/['"]/g, '')
+          reason: data.content[0].text.trim().replace(/['"]/g, ''),
+          source: "Claude Haiku"
         }, { headers: corsHeaders });
       }
     }
 
-    // Fallback: Pre-written responses if no API key is configured
+    // Fallback: Pre-written responses if no AI is available
     const fallbackReasons = [
       "Your brain cells are literally holding tiny protest signs that say 'No coffee, no cognitive function.'",
       "The Monday morning energy vampires have drained your soul, and only coffee can resurrect your will to live.",
@@ -92,7 +116,8 @@ export async function onRequest(context) {
     
     return Response.json({ 
       reason: randomReason,
-      note: "💡 Tip: Donate me a coffee!"
+      source: "Fallback mode",
+      note: "💡 Tip: Enable Cloudflare AI for unlimited AI-generated reasons!"
     }, { headers: corsHeaders });
 
   } catch (error) {
