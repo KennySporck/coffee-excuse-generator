@@ -92,7 +92,7 @@ export async function onRequest(context) {
     
     return Response.json({ 
       reason: randomReason,
-      note: "💡 Tip: Add GROQ_API_KEY for unlimited AI-generated reasons!"
+      note: "💡 Tip: Donate me a coffee!"
     }, { headers: corsHeaders });
 
   } catch (error) {
