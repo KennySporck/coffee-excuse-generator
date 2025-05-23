@@ -20,7 +20,7 @@ export async function onRequest(context) {
       prompt: `Generate a witty, creative, and specific reason why someone needs coffee right now. 
 
 Requirements:
-- Make it IT-engineer or QA-engineer related
+- Make it QA-engineer related
 - Keep it stupid simple
 - One sentence only
 - Be humorous and relatable
