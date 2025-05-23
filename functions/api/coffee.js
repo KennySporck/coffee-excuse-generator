@@ -20,15 +20,12 @@ export async function onRequest(context) {
       prompt: `Generate a witty, creative, and specific reason why someone needs coffee right now. 
 
 Requirements:
+- Make it IT-engineer related
+- Keep it stupid simple
 - One sentence only
 - Be humorous and relatable
 - Make it specific and creative
 - No quotes around the response
-
-Examples of good responses:
-- Your brain cells are holding tiny protest signs demanding caffeine before they'll process another thought
-- The Monday energy vampires have drained your soul and only coffee can resurrect your productivity
-- Your neurons are staging a revolt and will only negotiate through the medium of espresso
 
 Generate a unique reason:`
     });
