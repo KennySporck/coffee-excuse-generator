@@ -17,13 +17,14 @@ export async function onRequest(context) {
   try {
     // Use Cloudflare AI (FREE!)
     const aiResponse = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
-      prompt: `Generate a humorous reason why someone needs coffee right now. 
+      prompt: `Generate a unique humorous reason why someone needs coffee right now. 
 
 Requirements:
+- Make it IT related
 - Keep it stupid simple
+- Make each request unique and diverse from the previous
 - One short sentence only 
 - Be humorous and relatable
-- Make it specific and creative
 - No quotes around the response
 
 Generate a unique reason:`
