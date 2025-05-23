@@ -17,12 +17,11 @@ export async function onRequest(context) {
   try {
     // Use Cloudflare AI (FREE!)
     const aiResponse = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
-      prompt: `Generate a witty, creative, and specific reason why someone needs coffee right now. 
+      prompt: `Generate a humorous reason why someone needs coffee right now. 
 
 Requirements:
-- Make it QA-engineer related
 - Keep it stupid simple
-- One sentence only
+- One short sentence only 
 - Be humorous and relatable
 - Make it specific and creative
 - No quotes around the response
