@@ -7,9 +7,18 @@ function ExcuseGenerator() {
   const generateReason = async () => {
     setLoading(true);
     setExcuse('Generating your perfect coffee excuse...');
+    
+    // Check if Worker URL is configured
+    const workerUrl = process.env.REACT_APP_WORKER_URL;
+    if (!workerUrl) {
+      console.error('Worker URL not configured');
+      setExcuse('Configuration error: Worker URL not found');
+      setLoading(false);
+      return;
+    }
+
     try {
-      // Replace with your Cloudflare Worker endpoint
-      const response = await fetch(`${process.env.REACT_APP_WORKER_URL}/api/coffee`);
+      const response = await fetch(`${workerUrl}/api/coffee`);
       const data = await response.json();
       if (data.error) throw new Error(data.error);
       setExcuse(`"${data.reason}"`);
@@ -18,7 +27,6 @@ function ExcuseGenerator() {
       setExcuse('Oops! The coffee machine is broken. Try again in a moment.');
     }
     setLoading(false);
-    console.log(process.env.REACT_APP_WORKER_URL);
   };
 
   return (
