@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #6B4423 0%, #3C2414 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #F5E6D3;
+}
+
+.container {
+    text-align: center;
+    max-width: 600px;
+    padding: 2rem;
+    background: rgba(59, 36, 20, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    color: #D4A574;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+header .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.coffee-cup {
+    font-size: 4rem;
+    margin: 1rem 0;
+    animation: steam 2s ease-in-out infinite;
+}
+
+@keyframes steam {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.generate-btn {
+    background: linear-gradient(45deg, #8B4513, #A0522D);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin: 1rem 0;
+}
+
+.generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(45deg, #A0522D, #CD853F);
+}
+
+.generate-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.reason-display {
+    background: rgba(245, 230, 211, 0.1);
+    border: 2px solid #D4A574;
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem 0;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.reason-display.loading {
+    opacity: 0.7;
+}
+
+.footer {
+    margin-top: 2rem;
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+.footer a {
+    color: #DEB887;
+}
+
+.footer a:hover {
+    color: #DAA520;
+}
