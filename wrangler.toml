@@ -5,3 +5,7 @@ compatibility_date = "2025-05-26"
 [ai]
 binding = "AI"
 model = "@cf/meta/llama-3.1-8b-instruct"
+
+# Add Pages configuration
+[pages]
+pages_build_output_dir = "coffee-excuse-generator-react/build"
