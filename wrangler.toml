@@ -1,4 +1,4 @@
-name = "coffee-excuse-generator-react"
+name = "coffee-excuse-generator"
 main = "functions/api/coffee.js"
 compatibility_date = "2025-05-26"
 
