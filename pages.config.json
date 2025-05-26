@@ -1,0 +1,8 @@
+{
+    "buildCommand": "cd coffee-excuse-generator-react && npm install && npm run build",
+    "outputDirectory": "coffee-excuse-generator-react/build",
+    "rootDirectory": "/",
+    "environment": {
+      "REACT_APP_WORKER_URL": "https://coffee-excuse-generator.kenny-sporck.workers.dev"
+    }
+}
