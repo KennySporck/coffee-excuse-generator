@@ -101,10 +101,12 @@ function ExcuseGenerator() {
     const stored = localStorage.getItem('coffeeClientId');
     if (stored) return stored;
     
+    const screenWidth = typeof window !== 'undefined' && typeof window.screen !== 'undefined' ? window.screen.width : '';
+    const screenHeight = typeof window !== 'undefined' && typeof window.screen !== 'undefined' ? window.screen.height : '';
     const clientId = btoa(
       navigator.userAgent + 
-      screen.width + 
-      screen.height + 
+      screenWidth + 
+      screenHeight + 
       navigator.language +
       Date.now()
     ).slice(0, 32);
