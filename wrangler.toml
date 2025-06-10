@@ -1,5 +1,5 @@
 name = "coffee-excuse-generator"
-main = "src/worker.js"
+main = "functions/api/coffee.js"
 compatibility_date = "2023-06-26"
 
 # AI binding for Cloudflare Workers AI
@@ -9,18 +9,14 @@ binding = "AI"
 # KV Namespace for rate limiting and logging
 [[kv_namespaces]]
 binding = "COFFEE_KV"
-id = "your-kv-namespace-id"
-preview_id = "your-kv-preview-namespace-id"
+id = "3472b4d3ba1c4e3c8aba4992c928fab3"
+preview_id = "daaf9aab2f5b4fbd80b25eb272011539"
 
 # Environment variables
 [vars]
 ENVIRONMENT = "production"
 
 # Analytics (optional)
-[analytics_engine_datasets]
+[[analytics_engine_datasets]]
 binding = "ANALYTICS"
-name = "coffee-excuse-analytics"
-
-# Rate limiting at the edge (optional additional layer)
-[rate_limiting]
-enabled = true
+dataset = "coffee-excuse-analytics"
