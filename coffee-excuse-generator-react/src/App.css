@@ -64,9 +64,10 @@ header .subtitle {
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     margin: 1rem 0;
+    min-width: 280px;
 }
 
-.generate-btn:hover {
+.generate-btn:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     background: linear-gradient(45deg, #A0522D, #CD853F);
@@ -76,6 +77,27 @@ header .subtitle {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none;
+    background: linear-gradient(45deg, #666, #888);
+}
+
+.cooldown-message {
+    background: rgba(255, 193, 7, 0.2);
+    border: 1px solid #FFC107;
+    border-radius: 10px;
+    padding: 0.8rem 1.5rem;
+    margin: 1rem 0;
+    font-size: 1rem;
+    color: #FFC107;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 .reason-display {
@@ -95,6 +117,16 @@ header .subtitle {
 
 .reason-display.loading {
     opacity: 0.7;
+    animation: loading-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loading-pulse {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 0.8;
+    }
 }
 
 .footer {
@@ -109,4 +141,32 @@ header .subtitle {
 
 .footer a:hover {
     color: #DAA520;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .generate-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        min-width: 250px;
+    }
+    
+    .reason-display {
+        font-size: 1.1rem;
+        padding: 1.5rem;
+    }
+    
+    .cooldown-message {
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+    }
 }
